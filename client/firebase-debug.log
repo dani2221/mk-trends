@@ -1,0 +1,108 @@
+[debug] [2022-11-26T21:03:17.704Z] ----------------------------------------------------------------------
+[debug] [2022-11-26T21:03:17.705Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2022-11-26T21:03:17.705Z] CLI Version:   11.16.1
+[debug] [2022-11-26T21:03:17.705Z] Platform:      darwin
+[debug] [2022-11-26T21:03:17.706Z] Node Version:  v18.12.1
+[debug] [2022-11-26T21:03:17.706Z] Time:          Sat Nov 26 2022 22:03:17 GMT+0100 (Central European Standard Time)
+[debug] [2022-11-26T21:03:17.706Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-26T21:03:17.709Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-26T21:03:17.709Z] > authorizing via signed-in user (danilo.najkov@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/danilonajkov/mktrends/client
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2022-11-26T21:03:41.545Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2022-11-26T21:04:04.898Z] ----------------------------------------------------------------------
+[debug] [2022-11-26T21:04:04.898Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2022-11-26T21:04:04.899Z] CLI Version:   11.16.1
+[debug] [2022-11-26T21:04:04.899Z] Platform:      darwin
+[debug] [2022-11-26T21:04:04.899Z] Node Version:  v18.12.1
+[debug] [2022-11-26T21:04:04.900Z] Time:          Sat Nov 26 2022 22:04:04 GMT+0100 (Central European Standard Time)
+[debug] [2022-11-26T21:04:04.900Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-26T21:04:04.902Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-26T21:04:04.902Z] > authorizing via signed-in user (danilo.najkov@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/danilonajkov/mktrends/client
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2022-11-26T21:04:13.166Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2022-11-26T21:04:13.935Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2022-11-26T21:04:13.935Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project mk-trends (mk-trends) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2022-11-26T21:04:33.077Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2022-11-26T21:04:33.647Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2022-11-26T21:04:33.647Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"9.14.0","browserURL":"https://www.gstatic.com/firebasejs/9.14.0/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/9.14.0/firebase.tgz"},"live":{"version":"9.14","browserURL":"https://www.gstatic.com/firebasejs/live/9.14/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/9.14/firebase.tgz"},"components":{"analytics":"https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js","app-check":"https://www.gstatic.com/firebasejs/9.14.0/firebase-app-check.js","auth":"https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js","auth/cordova":"https://www.gstatic.com/firebasejs/9.14.0/firebase-auth/cordova.js","auth/react-native":"https://www.gstatic.com/firebasejs/9.14.0/firebase-auth/react-native.js","functions":"https://www.gstatic.com/firebasejs/9.14.0/firebase-functions.js","firestore":"https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js","firestore/lite":"https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore/lite.js","installations":"https://www.gstatic.com/firebasejs/9.14.0/firebase-installations.js","storage":"https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/9.14.0/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/9.14.0/firebase-remote-config.js","messaging":"https://www.gstatic.com/firebasejs/9.14.0/firebase-messaging.js","messaging/sw":"https://www.gstatic.com/firebasejs/9.14.0/firebase-messaging/sw.js","database":"https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js","firestore.memory":"https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.memory.js"}}
+[info] ✔  Wrote build/index.html 
+[info] 
+[info] i  Detected a .git folder at /Users/danilonajkov/mktrends 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=1019651230&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2022-11-26T21:04:41.733Z] >>> [apiv2][query] POST https://github.com/login/oauth/access_token [none]
+[debug] [2022-11-26T21:04:41.734Z] >>> [apiv2][body] POST https://github.com/login/oauth/access_token [stream]
+[debug] [2022-11-26T21:04:42.065Z] <<< [apiv2][status] POST https://github.com/login/oauth/access_token 200
+[debug] [2022-11-26T21:04:42.065Z] <<< [apiv2][body] POST https://github.com/login/oauth/access_token {"access_token":"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","token_type":"bearer","scope":"read:user,repo"}
+[debug] [2022-11-26T21:04:42.096Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2022-11-26T21:04:42.475Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2022-11-26T21:04:42.475Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"dani2221","id":55097438,"node_id":"MDQ6VXNlcjU1MDk3NDM4","avatar_url":"https://avatars.githubusercontent.com/u/55097438?v=4","gravatar_id":"","url":"https://api.github.com/users/dani2221","html_url":"https://github.com/dani2221","followers_url":"https://api.github.com/users/dani2221/followers","following_url":"https://api.github.com/users/dani2221/following{/other_user}","gists_url":"https://api.github.com/users/dani2221/gists{/gist_id}","starred_url":"https://api.github.com/users/dani2221/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/dani2221/subscriptions","organizations_url":"https://api.github.com/users/dani2221/orgs","repos_url":"https://api.github.com/users/dani2221/repos","events_url":"https://api.github.com/users/dani2221/events{/privacy}","received_events_url":"https://api.github.com/users/dani2221/received_events","type":"User","site_admin":false,"name":"Danilo Najkov","company":null,"blog":"","location":"Skopje","email":null,"hireable":null,"bio":null,"twitter_username":null,"public_repos":12,"public_gists":1,"followers":12,"following":3,"created_at":"2019-09-09T14:41:01Z","updated_at":"2022-11-16T10:31:52Z","private_gists":7,"total_private_repos":12,"owned_private_repos":12,"disk_usage":76145,"collaborators":1,"two_factor_authentication":false,"plan":{"name":"pro","space":976562499,"collaborators":0,"private_repos":9999}}
+[info] 
+[info] ✔  Success! Logged into GitHub as dani2221 
+[info] 
+[debug] [2022-11-26T21:05:29.093Z] >>> [apiv2][query] GET https://api.github.com/repos/dani2221/mk-trends/actions/secrets/public-key type=owner
+[debug] [2022-11-26T21:05:29.606Z] <<< [apiv2][status] GET https://api.github.com/repos/dani2221/mk-trends/actions/secrets/public-key 200
+[debug] [2022-11-26T21:05:29.606Z] <<< [apiv2][body] GET https://api.github.com/repos/dani2221/mk-trends/actions/secrets/public-key {"key_id":"568250167242549743","key":"rrHdJi/dYFhaihgOK9k+sysgvIdudAHmXDWl2X2i3Qs="}
+[debug] [2022-11-26T21:05:29.607Z] >>> [apiv2][query] GET https://api.github.com/repos/dani2221/mk-trends [none]
+[debug] [2022-11-26T21:05:29.913Z] <<< [apiv2][status] GET https://api.github.com/repos/dani2221/mk-trends 200
+[debug] [2022-11-26T21:05:29.913Z] <<< [apiv2][body] GET https://api.github.com/repos/dani2221/mk-trends {"id":571005840,"node_id":"R_kgDOIgjbkA","name":"mk-trends","full_name":"dani2221/mk-trends","private":true,"owner":{"login":"dani2221","id":55097438,"node_id":"MDQ6VXNlcjU1MDk3NDM4","avatar_url":"https://avatars.githubusercontent.com/u/55097438?v=4","gravatar_id":"","url":"https://api.github.com/users/dani2221","html_url":"https://github.com/dani2221","followers_url":"https://api.github.com/users/dani2221/followers","following_url":"https://api.github.com/users/dani2221/following{/other_user}","gists_url":"https://api.github.com/users/dani2221/gists{/gist_id}","starred_url":"https://api.github.com/users/dani2221/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/dani2221/subscriptions","organizations_url":"https://api.github.com/users/dani2221/orgs","repos_url":"https://api.github.com/users/dani2221/repos","events_url":"https://api.github.com/users/dani2221/events{/privacy}","received_events_url":"https://api.github.com/users/dani2221/received_events","type":"User","site_admin":false},"html_url":"https://github.com/dani2221/mk-trends","description":null,"fork":false,"url":"https://api.github.com/repos/dani2221/mk-trends","forks_url":"https://api.github.com/repos/dani2221/mk-trends/forks","keys_url":"https://api.github.com/repos/dani2221/mk-trends/keys{/key_id}","collaborators_url":"https://api.github.com/repos/dani2221/mk-trends/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/dani2221/mk-trends/teams","hooks_url":"https://api.github.com/repos/dani2221/mk-trends/hooks","issue_events_url":"https://api.github.com/repos/dani2221/mk-trends/issues/events{/number}","events_url":"https://api.github.com/repos/dani2221/mk-trends/events","assignees_url":"https://api.github.com/repos/dani2221/mk-trends/assignees{/user}","branches_url":"https://api.github.com/repos/dani2221/mk-trends/branches{/branch}","tags_url":"https://api.github.com/repos/dani2221/mk-trends/tags","blobs_url":"https://api.github.com/repos/dani2221/mk-trends/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/dani2221/mk-trends/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/dani2221/mk-trends/git/refs{/sha}","trees_url":"https://api.github.com/repos/dani2221/mk-trends/git/trees{/sha}","statuses_url":"https://api.github.com/repos/dani2221/mk-trends/statuses/{sha}","languages_url":"https://api.github.com/repos/dani2221/mk-trends/languages","stargazers_url":"https://api.github.com/repos/dani2221/mk-trends/stargazers","contributors_url":"https://api.github.com/repos/dani2221/mk-trends/contributors","subscribers_url":"https://api.github.com/repos/dani2221/mk-trends/subscribers","subscription_url":"https://api.github.com/repos/dani2221/mk-trends/subscription","commits_url":"https://api.github.com/repos/dani2221/mk-trends/commits{/sha}","git_commits_url":"https://api.github.com/repos/dani2221/mk-trends/git/commits{/sha}","comments_url":"https://api.github.com/repos/dani2221/mk-trends/comments{/number}","issue_comment_url":"https://api.github.com/repos/dani2221/mk-trends/issues/comments{/number}","contents_url":"https://api.github.com/repos/dani2221/mk-trends/contents/{+path}","compare_url":"https://api.github.com/repos/dani2221/mk-trends/compare/{base}...{head}","merges_url":"https://api.github.com/repos/dani2221/mk-trends/merges","archive_url":"https://api.github.com/repos/dani2221/mk-trends/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/dani2221/mk-trends/downloads","issues_url":"https://api.github.com/repos/dani2221/mk-trends/issues{/number}","pulls_url":"https://api.github.com/repos/dani2221/mk-trends/pulls{/number}","milestones_url":"https://api.github.com/repos/dani2221/mk-trends/milestones{/number}","notifications_url":"https://api.github.com/repos/dani2221/mk-trends/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/dani2221/mk-trends/labels{/name}","releases_url":"https://api.github.com/repos/dani2221/mk-trends/releases{/id}","deployments_url":"https://api.github.com/repos/dani2221/mk-trends/deployments","created_at":"2022-11-26T21:05:18Z","updated_at":"2022-11-26T21:05:18Z","pushed_at":"2022-11-26T21:05:19Z","git_url":"git://github.com/dani2221/mk-trends.git","ssh_url":"git@github.com:dani2221/mk-trends.git","clone_url":"https://github.com/dani2221/mk-trends.git","svn_url":"https://github.com/dani2221/mk-trends","homepage":null,"size":0,"stargazers_count":0,"watchers_count":0,"language":null,"has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"has_discussions":false,"forks_count":0,"mirror_url":null,"archived":false,"disabled":false,"open_issues_count":0,"license":null,"allow_forking":true,"is_template":false,"web_commit_signoff_required":false,"topics":[],"visibility":"private","forks":0,"open_issues":0,"watchers":0,"default_branch":"master","permissions":{"admin":true,"maintain":true,"push":true,"triage":true,"pull":true},"temp_clone_token":"ANELQXVPAJEYEHNWWY6PU73DQKAMK","allow_squash_merge":true,"allow_merge_commit":true,"allow_rebase_merge":true,"allow_auto_merge":false,"delete_branch_on_merge":false,"allow_update_branch":false,"use_squash_pr_title_as_default":false,"squash_merge_commit_message":"COMMIT_MESSAGES","squash_merge_commit_title":"COMMIT_OR_PR_TITLE","merge_commit_message":"PR_TITLE","merge_commit_title":"MERGE_MESSAGE","network_count":0,"subscribers_count":1}
+[debug] [2022-11-26T21:05:29.915Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/mk-trends/serviceAccounts [none]
+[debug] [2022-11-26T21:05:29.915Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/mk-trends/serviceAccounts {"accountId":"github-action-571005840","serviceAccount":{"displayName":"GitHub Actions (dani2221/mk-trends)","description":"A service account with permission to deploy to Firebase Hosting for the GitHub repository dani2221/mk-trends"}}
+[debug] [2022-11-26T21:05:39.608Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/mk-trends/serviceAccounts 200
+[debug] [2022-11-26T21:05:39.609Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/mk-trends/serviceAccounts [omitted]
+[debug] [2022-11-26T21:05:39.609Z] >>> [apiv2][query] GET https://iam.googleapis.com/v1/projects/mk-trends/serviceAccounts/github-action-571005840@mk-trends.iam.gserviceaccount.com [none]
+[debug] [2022-11-26T21:05:39.612Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mk-trends:getIamPolicy [none]
+[debug] [2022-11-26T21:05:40.514Z] <<< [apiv2][status] GET https://iam.googleapis.com/v1/projects/mk-trends/serviceAccounts/github-action-571005840@mk-trends.iam.gserviceaccount.com 200
+[debug] [2022-11-26T21:05:40.515Z] <<< [apiv2][body] GET https://iam.googleapis.com/v1/projects/mk-trends/serviceAccounts/github-action-571005840@mk-trends.iam.gserviceaccount.com {"name":"projects/mk-trends/serviceAccounts/github-action-571005840@mk-trends.iam.gserviceaccount.com","projectId":"mk-trends","uniqueId":"116186862045820853110","email":"github-action-571005840@mk-trends.iam.gserviceaccount.com","displayName":"GitHub Actions (dani2221/mk-trends)","etag":"MDEwMjE5MjA=","description":"A service account with permission to deploy to Firebase Hosting for the GitHub repository dani2221/mk-trends","oauth2ClientId":"116186862045820853110"}
+[debug] [2022-11-26T21:05:45.265Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/mk-trends:getIamPolicy 200
+[debug] [2022-11-26T21:05:45.266Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mk-trends:getIamPolicy {"version":1,"etag":"BwXrhdnwKVg=","bindings":[{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:firebase-service-account@firebase-sa-management.iam.gserviceaccount.com","serviceAccount:service-1003951366141@gcp-sa-firebase.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-gqyy6@mk-trends.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-1003951366141@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-gqyy6@mk-trends.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:danilo.najkov@gmail.com"]},{"role":"roles/pubsub.serviceAgent","members":["serviceAccount:service-1003951366141@gcp-sa-pubsub.iam.gserviceaccount.com"]}]}
+[debug] [2022-11-26T21:05:45.267Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mk-trends:setIamPolicy [none]
+[debug] [2022-11-26T21:05:45.267Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mk-trends:setIamPolicy {"policy":{"version":1,"etag":"BwXrhdnwKVg=","bindings":[{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:firebase-service-account@firebase-sa-management.iam.gserviceaccount.com","serviceAccount:service-1003951366141@gcp-sa-firebase.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-gqyy6@mk-trends.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-1003951366141@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-gqyy6@mk-trends.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:danilo.najkov@gmail.com"]},{"role":"roles/pubsub.serviceAgent","members":["serviceAccount:service-1003951366141@gcp-sa-pubsub.iam.gserviceaccount.com"]},{"role":"roles/firebaseauth.admin","members":["serviceAccount:github-action-571005840@mk-trends.iam.gserviceaccount.com"]},{"role":"roles/serviceusage.apiKeysViewer","members":["serviceAccount:github-action-571005840@mk-trends.iam.gserviceaccount.com"]},{"role":"roles/firebasehosting.admin","members":["serviceAccount:github-action-571005840@mk-trends.iam.gserviceaccount.com"]},{"role":"roles/run.viewer","members":["serviceAccount:github-action-571005840@mk-trends.iam.gserviceaccount.com"]}]},"updateMask":"bindings"}
