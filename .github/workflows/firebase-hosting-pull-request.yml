@@ -3,6 +3,8 @@
 
 name: Deploy to Firebase Hosting on PUSH
 'on': push
+env:
+  CI: false
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
