@@ -5,6 +5,7 @@ import { Masonry } from '@mui/lab';
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import NewsCard from './Components/NewsCard';
+import process from "process";
 
 function App() {
 
@@ -13,10 +14,21 @@ function App() {
   const [loadingMessage, setLoadingMessage] = useState("Се вчитуваат содржини")
 
   useEffect(() => {
+
+    const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+
+    let url = ''
+    if(development){
+      url = 'http://localhost:8080/data'
+    }else{
+      url = 'https://naas-api.azurewebsites.net/data'
+    }
+
+
     const timeout = setTimeout(() => {
       setLoadingMessage("Пронајдени се нови содржини. Се сумаризираат и се одредува популарноста. Ве молиме почекајте!")
     }, 5000)
-    axios.get('https://naas-api.azurewebsites.net/data').then(el => {
+    axios.get(url).then(el => {
       setLoading(false)
       setLoadingMessage("");
       clearTimeout(timeout);

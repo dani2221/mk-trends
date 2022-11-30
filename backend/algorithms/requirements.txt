@@ -1,0 +1,11 @@
+flask
+joblib
+scikit-learn==1.0.2
+gensim==3.6.0
+bs4
+nltk
+pandas
+lxml
+requests
+networkx
+Flask-Cors==3.0.10

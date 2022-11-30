@@ -3,7 +3,7 @@
 }
 .box{
   display:inline-block;
-  *dsplay:inline;/* For IE7*/
+  *display:inline;/* For IE7*/
   *zoom:1;/* For IE7*/
   white-space:normal;
 }
