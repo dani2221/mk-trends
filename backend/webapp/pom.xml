@@ -10,7 +10,7 @@
     </parent>
     <groupId>mk.trends</groupId>
     <artifactId>webapp</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.1.0</version>
     <name>webapp</name>
     <description>webapp</description>
     <properties>
@@ -24,14 +24,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

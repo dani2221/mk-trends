@@ -1,0 +1,24 @@
+version: '2.4'
+services:
+    webapp:
+        container_name: webapp
+        build:
+            context: webapp
+            dockerfile: Dockerfile
+        platform: linux/amd64
+        image: dann132/webapp:latest
+        ports:
+            - 80:80
+        restart: always
+        links:
+            - "algorithms:algs"
+    algorithms:
+        container_name: algorithms
+        build:
+            context: algorithms
+            dockerfile: Dockerfile
+        platform: linux/amd64
+        image: dann132/algorithms:latest
+        ports:
+            - 8081:5000
+        restart: always

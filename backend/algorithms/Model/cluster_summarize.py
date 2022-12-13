@@ -1,3 +1,5 @@
+import json
+
 import nltk
 import numpy as np
 import pandas as pd
@@ -50,7 +52,8 @@ class TextClusterSummarize:
             # for later
             pass
         if self.articles.empty:
-            self.scrape_articles()
+            arcs = self.scrape_articles()
+            self.send_news(arcs)
         self.prepare_text()
         tfidf = self.vectorize_text()
         clusters = self.cluster_dbscan(tfidf)
@@ -58,6 +61,7 @@ class TextClusterSummarize:
             results = self.summarize_textrank(clusters)
         else:
             results = self.summarize_lsa(clusters)
+            self.send_summaries(results)
 
         return results
 
@@ -126,7 +130,7 @@ class TextClusterSummarize:
 
                 if len(clean_text) < 30:
                     continue
-                article_data['content'] = clean_text
+                article_data['text'] = clean_text
                 # article_data['title'] = self.clean_text(article.find('title').text)
                 article_data['title'] = article.find('title').text
                 try:
@@ -135,15 +139,16 @@ class TextClusterSummarize:
                     pass
 
                 if '.jpg' in article.text:
-                    article_data['image'] = 'http' + article.text.split('.jpg')[0].split('http')[-1] + '.jpg'
+                    article_data['photoUrl'] = 'http' + article.text.split('.jpg')[0].split('http')[-1] + '.jpg'
                 else:
                     if '.png' in article.text:
-                        article_data['image'] = 'http' + article.text.split('.png')[0].split('http')[-1] + '.png'
+                        article_data['photoUrl'] = 'http' + article.text.split('.png')[0].split('http')[-1] + '.png'
                     else:
                         if article.find('img') is not None:
-                            article_data['image'] = article.find('img')['src']
+                            article_data['photoUrl'] = article.find('img')['src']
                 articles.append(article_data)
 
+        articles = list({v['link']: v for v in articles}.values())
         self.articles = pd.DataFrame(articles)
         print(self.articles.head())
         return articles
@@ -177,12 +182,12 @@ class TextClusterSummarize:
         return t.strip()
 
     def prepare_text(self):
-        self.articles['clean_content'] = self.articles['content'].apply(clean)
-        self.articles['clean_content'] = self.articles['clean_content'].apply(remove_stopwords)
+        self.articles['clean_text'] = self.articles['text'].apply(clean)
+        self.articles['clean_text'] = self.articles['clean_text'].apply(remove_stopwords)
 
     def vectorize_text(self):
         tf_idf_vectorizer = TfidfVectorizer()
-        return tf_idf_vectorizer.fit_transform(self.articles['clean_content'])
+        return tf_idf_vectorizer.fit_transform(self.articles['clean_text'])
 
     def cluster_dbscan(self, tf_idf, eps=0.97, min_samples=3):
         dbscan = DBSCAN(eps=eps, min_samples=min_samples)
@@ -205,8 +210,8 @@ class TextClusterSummarize:
             sentences = []
             original_sentences = []
             for index, row in self.articles[self.articles['label'] == cluster].iterrows():
-                s = nltk.sent_tokenize(row['clean_content'])
-                o = nltk.sent_tokenize(row['content'])
+                s = nltk.sent_tokenize(row['clean_text'])
+                o = nltk.sent_tokenize(row['text'])
                 if len(s) == len(o):
                     sentences.append(s)
                     original_sentences.append(o)
@@ -263,13 +268,20 @@ class TextClusterSummarize:
         nltk.download("punkt", quiet=True)
         summaries = []
         cl_num = 1
-        output = self.articles.groupby(['label'], as_index=False).agg({'content': ' '.join})
+        output = self.articles.groupby(['label'], as_index=False).agg({'text': ' '.join})
         for cluster in set(clusters):
             print(f'{cl_num}/{len(set(clusters))}')
             cl_num += 1
             if cluster == -1:
                 continue
-            text = output[output['label'] == cluster]['content'].iloc[0]
+
+            links = list(self.articles.loc[self.articles.label == cluster]['id'].dropna())
+            unique_sources = set(self.articles.loc[self.articles.label == cluster]['source'])
+            if len(unique_sources) < len(links) * 0.6:
+                continue
+
+
+            text = output[output['label'] == cluster]['text'].iloc[0]
             summarizer = LsaSummarizer()
             summarizer.stop_words = _stopwords
             summary = summarizer(text)
@@ -299,18 +311,27 @@ class TextClusterSummarize:
             titles = list(self.articles.loc[self.articles.label == cluster]['title'])
             title = max(set(titles), key=titles.count)
 
-            pic = self.articles.loc[self.articles.label == cluster]['image'].dropna()
+            pic = self.articles.loc[self.articles.label == cluster]['photoUrl'].dropna()
 
             if len(pic) > 0:
                 pic = pic.iloc[0]
             else:
                 pic = None
 
-            links = list(self.articles.loc[self.articles.label == cluster]['link'].dropna())
-            links = [el.split('\n')[0] for el in links]
-
             summaries.append(
-                {'text': summarized, 'cluster': int(cluster), 'popularity': int(cluster_sizes[cluster]), 'title': title,
-                 'image': pic, 'links': links})
+                {'summary': summarized, 'title': title, 'photoUrl': pic, 'linkedNewsItemIds': links})
 
-        return sorted(summaries, key=lambda k: k['popularity'], reverse=True)
+        return summaries
+
+    def send_news(self, arcs):
+        url = "http://webapp:80/internal/news"
+        headers = {'Content-type': 'application/json'}
+        r = requests.post(url, data=json.dumps(arcs), headers=headers)
+        data = r.json()
+        self.articles['id'] = data
+
+    def send_summaries(self, results):
+        url = "http://webapp:80/internal/summaries"
+        headers = {'Content-type': 'application/json'}
+        r = requests.post(url, data=json.dumps(results), headers=headers)
+        print(r.status_code)

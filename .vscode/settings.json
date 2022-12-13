@@ -31,5 +31,12 @@
         ".vscode{,/**}"
     ],
     "appService.defaultWebAppToDeploy": "/subscriptions/792b27c2-93f5-4288-b86c-36584639d0e1/AppServices/subscriptions/792b27c2-93f5-4288-b86c-36584639d0e1/resourceGroups/VIS/providers/Microsoft.Web/sites/naas-api",
-    "appService.deploySubpath": "backend/algorithms"
+    "appService.deploySubpath": "backend/algorithms",
+    "azureFunctions.deploySubpath": "backend/functions",
+    "azureFunctions.scmDoBuildDuringDeployment": true,
+    "azureFunctions.projectLanguage": "Python",
+    "azureFunctions.projectRuntime": "~4",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.projectLanguageModel": 2,
+    "azureFunctions.projectSubpath": "backend/functions"
 }

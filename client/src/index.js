@@ -4,7 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { initializeApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDbcanNx2q7jSRB_IzzvJ4Cn6ZmYOnvHME",
+  authDomain: "chitaj.firebaseapp.com",
+  projectId: "chitaj",
+  storageBucket: "chitaj.appspot.com",
+  messagingSenderId: "171151478694",
+  appId: "1:171151478694:web:f7c27ec1b3757921ad0967",
+  measurementId: "G-XRF0FF5DSG"
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 const darkTheme = createTheme({
   palette: {

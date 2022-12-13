@@ -10,15 +10,15 @@ const NewsCard = ({ news }) => {
     }
 
     return (
-        <Card className={'newsCard'}>
+        <Card className={'newsCard'} style={{backgroundColor:'#121a1c'}}>
             <div style={{ textAlign: 'center', margin: '2px', fontSize: '14px' }}>
                 Популарност: {news.popularity}
             </div>
-            {news.image == null ? <></> :
+            {news.photoUrl == null ? <></> :
                 <CardMedia
                     component="img"
                     height="140"
-                    image={news.image}
+                    image={news.photoUrl}
                     alt="picture for the news"
                 />
             }
@@ -27,7 +27,7 @@ const NewsCard = ({ news }) => {
                     {news.title}
                 </Typography>
                 <ul>
-                    {news.text.map(txt =>
+                    {news.summary.map(txt =>
                         <li key={txt}>
                             <Typography variant="body2" color="text.secondary" style={{ textAlign: 'start' }}>
                                 {txt}
