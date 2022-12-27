@@ -1,12 +1,11 @@
 import './App.css';
-import Grid from '@mui/material/Grid';
 import { CircularProgress, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import NewsCard from './Components/NewsCard';
 import process from "process";
-import { Masonry } from '@mui/lab';
 import logo from './Images/chitaj_logo_dark_long.png'
+import FullView from './Components/Index/FullView/FullView';
+import ReducedView from './Components/Index/ReducedView/ReducedView';
 
 function App() {
 
@@ -17,7 +16,7 @@ function App() {
   const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
   let url = ''
-  if (false) {
+  if (development) {
     url = 'http://localhost:8080/?page=0&size=100'
   } else {
     url = 'https://mktrends.azurewebsites.net/?page=0&size=100'
@@ -40,11 +39,10 @@ function App() {
   return (
     <div className="App">
       <Paper style={{ width: '100%', padding: '3px 0', marginBottom: '20px', backgroundColor:'#253439' }}>
-        <img src={logo} alt='logo' height={'80px'}></img>
+        <img src={logo} alt='logo' height={80}></img>
       </Paper>
       <div style={{ margin: '10px' }}>
-        <Masonry spacing={3} columns={{ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }} style={{ margin: 0, width: '100%' }}>
-          {loading ?
+        {loading ?
             <Paper elevation={1} style={{ textAlign: 'center', padding: '30px' }}>
               <CircularProgress size={100} thickness={5} style={{ marginBottom: '20px' }} />
               <br />
@@ -52,10 +50,7 @@ function App() {
             </Paper> :
             <></>
           }
-          {news.items.map(el =>
-            <NewsCard news={el} key={el.title}></NewsCard>
-            )}
-        </Masonry>
+          <ReducedView news={news}/>
       </div>
     </div>
   );

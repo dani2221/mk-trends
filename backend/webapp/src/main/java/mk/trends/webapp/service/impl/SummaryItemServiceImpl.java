@@ -1,6 +1,5 @@
 package mk.trends.webapp.service.impl;
 
-import mk.trends.webapp.dtos.NewsItemDto;
 import mk.trends.webapp.dtos.SummaryItemRequestDto;
 import mk.trends.webapp.dtos.SummaryItemResponseDto;
 import mk.trends.webapp.dtos.SummaryPage;

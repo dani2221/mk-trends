@@ -13,4 +13,5 @@ public interface SummaryItemRepository extends JpaRepository<SummaryItem, Long> 
     Page<SummaryItem> findAllByLastIndexedAfter(LocalDateTime dateCreated, Pageable pageable);
     List<SummaryItem> findFirstByOrderByLastIndexedDesc();
     SummaryItem findBySummary(String summary);
+    List<SummaryItem> findAllByFirstIndexedAfter(LocalDateTime dateCreated);
 }

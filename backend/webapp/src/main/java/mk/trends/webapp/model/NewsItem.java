@@ -33,18 +33,25 @@ public class NewsItem {
     @Column(columnDefinition="TEXT", unique = true)
     private String link;
 
-    @ManyToMany(mappedBy = "linkedNewsItems")
-    private List<SummaryItem> linkedSummaryItems;
+    @ManyToMany(mappedBy = "newsItems")
+    private List<LinkedNewsItems> linkedNewsItems;
 
-    public NewsItem(String title, String source, String text, LocalDateTime firstIndexed, LocalDateTime lastIndexed, String photoUrl, String link) {
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+    private String bias;
+
+    public NewsItem(String title, String source, String text, LocalDateTime firstIndexed, LocalDateTime lastIndexed, String photoUrl, String link, Category category, String bias) {
         this.title = title;
         this.source = source;
         this.text = text;
         this.firstIndexed = firstIndexed;
         this.lastIndexed = lastIndexed;
         this.photoUrl = photoUrl;
-        this.linkedSummaryItems = new LinkedList<>();
+        this.linkedNewsItems = new LinkedList<>();
         this.link = link;
+        this.category = category;
+        this.bias = bias;
     }
 
     public NewsItem() {

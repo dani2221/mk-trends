@@ -4,9 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -31,20 +30,27 @@ public class SummaryItem {
 
     private int popularity;
 
-    @ManyToMany()
-    private List<NewsItem> linkedNewsItems;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "summaryItem")
+    private List<LinkedNewsItems> linkedNewsItems;
 
-    public SummaryItem(String title, LocalDateTime firstIndexed, LocalDateTime lastIndexed, String summary, String photoUrl, int popularity, List<NewsItem> linkedNewsItems) {
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+    public SummaryItem(String title, LocalDateTime firstIndexed, LocalDateTime lastIndexed, String summary, String photoUrl, int popularity, Category category) {
         this.title = title;
         this.firstIndexed = firstIndexed;
         this.lastIndexed = lastIndexed;
         this.summary = summary;
         this.photoUrl = photoUrl;
         this.popularity = popularity;
-        this.linkedNewsItems = linkedNewsItems;
+        this.linkedNewsItems = new ArrayList<>();
+        this.category = category;
     }
 
     public SummaryItem() {
 
+    }
+    public void addLinkedNewsItems(LinkedNewsItems linkedNewsItems){
+        this.linkedNewsItems.add(linkedNewsItems);
     }
 }

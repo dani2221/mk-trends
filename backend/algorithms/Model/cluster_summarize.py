@@ -6,6 +6,9 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import requests
 import re
+
+from gensim.models import Doc2Vec
+from gensim.models.doc2vec import TaggedDocument
 from sklearn.cluster import DBSCAN
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -14,6 +17,7 @@ from Model.LSA.lsa_summarizer import LsaSummarizer
 from Model.stopwords import _stopwords
 import html
 from bs4.element import Comment
+from joblib import dump, load
 
 
 def remove_media_names(words, text):
@@ -53,12 +57,14 @@ class TextClusterSummarize:
             pass
         if self.articles.empty:
             arcs = self.scrape_articles()
+            self.get_bias(arcs)
             self.send_news(arcs)
         self.prepare_text()
         tfidf = self.vectorize_text()
         clusters = self.cluster_dbscan(tfidf)
         if summarize_alg == 'text_rank':
             results = self.summarize_textrank(clusters)
+            self.send_summaries(results)
         else:
             results = self.summarize_lsa(clusters)
             self.send_summaries(results)
@@ -67,7 +73,9 @@ class TextClusterSummarize:
 
     def scrape_articles(self):
         articles = list()
-        for url in self.urls:
+        for src in self.urls:
+            url = src['url']
+            cat = src['category']
             try:
                 data = requests.get(url, headers={'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
                                                                 'AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -146,6 +154,7 @@ class TextClusterSummarize:
                     else:
                         if article.find('img') is not None:
                             article_data['photoUrl'] = article.find('img')['src']
+                article_data['category'] = cat
                 articles.append(article_data)
 
         articles = list({v['link']: v for v in articles}.values())
@@ -200,13 +209,19 @@ class TextClusterSummarize:
         for i in set(clusters):
             cluster_sizes[i] = len(self.articles.loc[self.articles['label'] == i])
 
-        summaries_text_rank = []
+        summaries = []
         cl_num = 1
         for cluster in set(clusters):
             print(f'{cl_num}/{len(set(clusters))}')
             cl_num += 1
             if cluster == -1:
                 continue
+
+            links = list(self.articles.loc[self.articles.label == cluster]['id'].dropna())
+            unique_sources = set(self.articles.loc[self.articles.label == cluster]['source'])
+            if len(unique_sources) < len(links) * 0.6:
+                continue
+
             sentences = []
             original_sentences = []
             for index, row in self.articles[self.articles['label'] == cluster].iterrows():
@@ -237,7 +252,8 @@ class TextClusterSummarize:
 
             counter = 0
             prev_vecs = []
-            summarized = ""
+            summarized = []
+            print(ranked_sentences[0])
             for score, sentence, vec in ranked_sentences:
                 if counter == num_sentences:
                     break
@@ -250,14 +266,26 @@ class TextClusterSummarize:
                         is_similar = True
                         break
                 if not is_similar:
-                    summarized += ' ' + sentence
+                    if len(sentence) < 50 or len(sentence) > 500:
+                        continue
+                    summarized.append(' ' + sentence)
                     prev_vecs.append(vec)
                     counter += 1
 
-            summaries_text_rank.append(
-                {'text': summarized, 'cluster': int(cluster), 'popularity': int(cluster_sizes[cluster])})
+            titles = list(self.articles.loc[self.articles.label == cluster]['title'])
+            title = max(set(titles), key=titles.count)
 
-        return sorted(summaries_text_rank, key=lambda k: k['popularity'], reverse=True)
+            pic = self.articles.loc[self.articles.label == cluster]['photoUrl'].dropna()
+
+            if len(pic) > 0:
+                pic = pic.iloc[0]
+            else:
+                pic = None
+
+            summaries.append(
+                {'summary': summarized, 'title': title, 'photoUrl': pic, 'linkedNewsItemIds': links})
+
+        return summaries
 
     def summarize_lsa(self, clusters, num_sentences=3):
 
@@ -324,14 +352,61 @@ class TextClusterSummarize:
         return summaries
 
     def send_news(self, arcs):
-        url = "http://webapp:80/internal/news"
+        url = "http://localhost:8080/internal/news"
         headers = {'Content-type': 'application/json'}
         r = requests.post(url, data=json.dumps(arcs), headers=headers)
         data = r.json()
         self.articles['id'] = data
 
     def send_summaries(self, results):
-        url = "http://webapp:80/internal/summaries"
+        url = "http://localhost:8080/internal/summaries"
         headers = {'Content-type': 'application/json'}
         r = requests.post(url, data=json.dumps(results), headers=headers)
         print(r.status_code)
+
+    @staticmethod
+    def clean(text):
+        text = BeautifulSoup(text, "lxml").text
+        text = re.sub(r'\|\|\|', r' ', text)
+        text = text.replace('„', '')
+        text = text.replace('“', '')
+        text = text.replace('"', '')
+        text = text.replace('\'', '')
+        text = text.replace('-', '')
+        text = text.lower()
+        return text
+
+    @staticmethod
+    def remove_stopwords(content):
+        for word in _stopwords:
+            content = content.replace(' ' + word + ' ', ' ')
+        return content
+
+    @staticmethod
+    def tokenize_text(text):
+        tokens = []
+        for sent in nltk.sent_tokenize(text):
+            for word in nltk.word_tokenize(sent):
+                if len(word) < 2:
+                    continue
+                tokens.append(word.lower())
+        return tokens
+
+    @staticmethod
+    def get_vec(model, tagged_docs):
+        sents = tagged_docs.values
+        features = [model.infer_vector(doc.words) for doc in sents]
+        return features
+
+    def get_bias(self, arcs):
+        svc = load('Model/Bias/bias_svc')
+        doc = Doc2Vec.load('Model/Bias/doc2vec_articles_0.model')
+        text_data = self.articles['text']
+        text_data = text_data.apply(clean)
+        text_data = text_data.map(remove_stopwords)
+        tg = text_data.apply(lambda r: TaggedDocument(words=self.tokenize_text(r), tags=[]))
+        tr = self.get_vec(doc, tg)
+        res = svc.predict_proba(tr)
+        for arc,bias in zip(arcs,res):
+            arc['bias'] = bias.tolist()
+        return arcs

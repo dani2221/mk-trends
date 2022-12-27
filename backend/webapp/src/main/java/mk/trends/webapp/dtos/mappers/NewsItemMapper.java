@@ -1,14 +1,16 @@
 package mk.trends.webapp.dtos.mappers;
 
-import mk.trends.webapp.dtos.NewsItemDto;
+import mk.trends.webapp.dtos.NewsItemRequestDto;
+import mk.trends.webapp.dtos.NewsItemResponseDto;
 import mk.trends.webapp.model.NewsItem;
 import mk.trends.webapp.repository.NewsItemRepository;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @Component
-public class NewsItemMapper implements Mapper<NewsItem, NewsItemDto, NewsItemDto>{
+public class NewsItemMapper implements Mapper<NewsItem, NewsItemRequestDto, NewsItemResponseDto>{
     private final NewsItemRepository newsItemRepository;
 
     public NewsItemMapper(NewsItemRepository newsItemRepository) {
@@ -16,7 +18,7 @@ public class NewsItemMapper implements Mapper<NewsItem, NewsItemDto, NewsItemDto
     }
 
     @Override
-    public NewsItem toEntity(NewsItemDto dto){
+    public NewsItem toEntity(NewsItemRequestDto dto){
         NewsItem oldItem = newsItemRepository
                 .findByLink(dto.getLink());
 
@@ -28,7 +30,9 @@ public class NewsItemMapper implements Mapper<NewsItem, NewsItemDto, NewsItemDto
                     LocalDateTime.now(),
                     LocalDateTime.now(),
                     dto.getPhotoUrl(),
-                    dto.getLink());
+                    dto.getLink(),
+                    dto.getCategory(),
+                    String.join("%%", dto.getBias().stream().map(x -> Float.toString(x)).toList()));
             return item;
         }
         else{
@@ -40,14 +44,13 @@ public class NewsItemMapper implements Mapper<NewsItem, NewsItemDto, NewsItemDto
     }
 
     @Override
-    public NewsItemDto toDto(NewsItem entity) {
-        NewsItemDto dto = new NewsItemDto(
+    public NewsItemResponseDto toDto(NewsItem entity) {
+        NewsItemResponseDto dto = new NewsItemResponseDto(
                 entity.getId(),
                 entity.getTitle(),
                 entity.getSource(),
-                entity.getText(),
-                entity.getPhotoUrl(),
-                entity.getLink());
+                entity.getLink(),
+                Arrays.stream(entity.getBias().split("%%")).map(x -> Float.parseFloat(x)).toList());
         return dto;
     }
 

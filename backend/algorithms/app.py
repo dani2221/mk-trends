@@ -19,7 +19,7 @@ def data():
     file = open('./Model/urls.json', encoding='utf8')
     urls = json.load(file)
     scraper = TextClusterSummarize(urls)
-    results = scraper.cluster_summarize(summarize_alg='lst')
+    results = scraper.cluster_summarize(summarize_alg='text_rank')
     last_update = datetime.now()
     
     final = {'results': results, 'date': last_update.strftime("%HH:%MM %d/%m/%Y")}
@@ -34,8 +34,8 @@ def index():
 
 
 if __name__ == "__main__":
-    is_prod = True
-    dev = {'webapp': 'http://localhost:80'}
+    is_prod = False
+    dev = {'webapp': 'http://localhost:8080'}
     prod = {'webapp': 'http://webapp:80'}
     active = prod if is_prod else dev
 

@@ -1,6 +1,6 @@
 package mk.trends.webapp.web;
 
-import mk.trends.webapp.dtos.NewsItemDto;
+import mk.trends.webapp.dtos.NewsItemRequestDto;
 import mk.trends.webapp.dtos.SummaryItemRequestDto;
 import mk.trends.webapp.service.NewsItemService;
 import mk.trends.webapp.service.SummaryItemService;
@@ -21,7 +21,7 @@ public class InternalController {
     }
 
     @PostMapping(value = "/news", produces = "application/json")
-    public List<Long> addNews(@RequestBody List<NewsItemDto> items){
+    public List<Long> addNews(@RequestBody List<NewsItemRequestDto> items){
         return this.newsItemService.addBulkItems(items);
     }
 

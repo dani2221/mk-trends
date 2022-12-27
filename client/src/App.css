@@ -10,3 +10,54 @@
 #newsCard{
   width:100%;
 }
+#reducedCard{
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#titleSize{
+  flex:6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#expandedTitle{
+  font-size: x-large;
+}
+#expandedHeader{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#expandedImage{
+  flex: 1;
+}
+#expandedText{
+  flex: 3;
+}
+#expandedImage{
+  aspect-ratio: 1;
+}
+@media only screen and (max-width: 600px) {
+  #reducedCard {
+    width: 100%;
+  }
+  #titleSize{
+    flex:3
+  }
+  #expandedTitle{
+    font-size: medium;
+  }
+}
+@media only screen and (max-width: 800px) {
+  #expandedHeader{
+    flex-direction: column-reverse;
+  }
+  #expandedImage{
+    aspect-ratio: 2;
+  }
+}
+.Mui-disabled {
+  opacity: 0.3 !important;
+}
